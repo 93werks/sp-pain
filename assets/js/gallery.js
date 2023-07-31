@@ -1,9 +1,27 @@
+init()
 
-return `<div class="row">
-  <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-    <img
-      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-      class="w-100 shadow-1-strong rounded mb-4"
-      alt="Boat on Calm Water"
-    />
-</div>`;
+function init() {
+
+  console.log("1234")
+
+  renderGalleryPain()
+}
+
+function renderGalleryPain() {
+let gallery = ""  
+
+fetch('./assets/json/images.json')
+  .then((response) => response.json())
+  .then((json) => {
+
+    let images = json
+
+    images.data.images.forEach((image, index) => {
+      gallery += `<a href="#img` + index + `"><img src="` + image.url + `"></a><a href="#" class="lightbox" id="img` + index + `"><span style="background-image: url('` + image.url + `')"></span></a>`
+    })
+
+  document.getElementById('gallery').innerHTML = gallery
+
+  })
+
+}
